@@ -1,0 +1,45 @@
+CREATE DATABASE distribuidora_tienda;
+USE distribuidora_tienda;
+
+-- Tabla de usuarios
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    rol ENUM('vendedor', 'admin') DEFAULT 'vendedor',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla de productos
+CREATE TABLE productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT DEFAULT 0,
+    fecha_ingreso TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO usuarios (nombre, correo, contraseña, rol) VALUES
+('Carlos Ramírez', 'carlosr@gmail.com', 'clave123', 'vendedor'),
+('Laura Gómez', 'laurag@gmail.com', 'clave123', 'vendedor'),
+('Andrés Pérez', 'andresp@gmail.com', 'clave123', 'vendedor'),
+('Mariana Torres', 'marianat@gmail.com', 'clave123', 'vendedor');
+
+INSERT INTO productos (nombre, descripcion, precio, stock) VALUES
+('Café Juan Valdez', 'Café premium 100% colombiano', 15000.00, 100),
+('Galletas Noel', 'Galletas surtidas tradicionales', 5000.00, 200),
+('Chocolate Luker', 'Tableta de chocolate para bebida caliente', 4000.00, 150),
+('Arequipe Alpina', 'Dulce de leche cremoso en envase de 220g', 6000.00, 120),
+('Agua Cristal', 'Botella de agua natural 600ml', 2000.00, 300),
+('Jugo Hit', 'Jugo de frutas natural en caja 250ml', 2500.00, 250),
+('Arroz Diana', 'Empaque de arroz blanco 1kg', 4500.00, 180),
+('Frijoles Cosecha Andina', 'Frijol rojo en empaque de 500g', 3500.00, 160),
+('Aceite Premier', 'Botella de aceite vegetal 900ml', 10000.00, 130),
+('Sal Refisal', 'Sal refinada en bolsa de 500g', 2000.00, 220),
+('Pan Bimbo', 'Pan tajado blanco familiar', 5800.00, 140),
+('Papas Margarita', 'Papas fritas sabor natural 30g', 1500.00, 300);
+
+
+
