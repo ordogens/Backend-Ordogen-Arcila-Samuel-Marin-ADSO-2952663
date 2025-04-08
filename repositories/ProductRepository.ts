@@ -7,4 +7,27 @@ export class ProductRepository {
         const [rows]: any = await db.query('SELECT * FROM productos');
         return rows;
     };
+
+    getProductById = async (id: number) => {
+        const [rows]: any = await db.query('SELECT * FROM productos WHERE id = ?', [id]);
+        return rows[0];
+    }
+
+    createProduct = async (product: productDto) => {
+        const {nombre,descripcion,precio,stock,fecha_ingreso} = product;
+        const [result]: any = await db.query('INSERT INTO productos (nombre,descripcion,precio,stock,fecha_ingreso) VALUES (?,?,?,?,?)', [nombre,descripcion,precio,stock,fecha_ingreso]);
+        return result.insertId;
+    }
+
+    updateProduct = async (id: number, product: productDto) => {
+        const {nombre,descripcion,precio,stock,fecha_ingreso} = product;
+        const [result]: any = await db.query('UPDATE productos SET nombre = ?, descripcion = ?, precio = ?, stock = ?, fecha_ingreso = ? WHERE id = ?', [nombre,descripcion,precio,stock,fecha_ingreso,id]);
+        return result.affectedRows;
+    }
+
+    deleteProduct = async (id: number) => {
+       const query = 'DELETE FROM productos WHERE id = ?';
+       const result = await db.execute<ResultSetHeader>(query, [id]);
+       return result[0].affectedRows;
+    }
 }
