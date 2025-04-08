@@ -2,6 +2,7 @@ import express from 'express'; // Importa el framework Express para crear la apl
 import cors from 'cors'; // Importa el middleware CORS para permitir solicitudes entre dominios
 import dotenv from 'dotenv'; // Importa dotenv para cargar variables de entorno desde el archivo .env
 import morgan from 'morgan'; // Importa morgan para el logging de las peticiones HTTP
+import ProductRoutes from './routes/ProductRoutes'; // Importa las rutas de productos definidas en otro archivo
 
 // Load environment variables
 dotenv.config(); // Carga las variables de entorno definidas en el archivo .env
@@ -15,7 +16,7 @@ app.use(express.json()); // Permite el parsing de JSON en las peticiones
 app.use(morgan('dev')); // Configura el logging en modo desarrollo
 
 // Routes
-// app.use('/api', routes); // Monta las rutas de la API bajo el prefijo /api
+app.use('/productos', ProductRoutes); // Monta las rutas de la API bajo el prefijo /api
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
