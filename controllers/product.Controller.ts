@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import * as ProductRepository from '../repositories/ProductRepository';
 import { ProductService } from '../services/productServices';
+import { productDto } from '../dto/productDTO';
 
 const productService = new ProductService();
 
@@ -24,7 +25,7 @@ export const updateProduct = async (req: Request, res: Response) => {
   const {nombre, descripcion, precio, stock, fecha_ingreso} = req.body;
   const id = req.params
   try{
-    const producto = await productService.update(Number(id), {nombre, descripcion, precio, stock, fecha_ingreso});
+    const producto = await productService.update(Number(id), ({nombre, descripcion, precio, stock, fecha_ingreso}) as productDto);
     return res.status(200).json(producto);
   }catch(err){
     return res.status(200).json({ error: err })
