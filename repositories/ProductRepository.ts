@@ -25,9 +25,10 @@ export class ProductRepository {
         return result.affectedRows;
     }
 
-    deleteProduct = async (id: number) => {
-       const query = 'DELETE FROM productos WHERE id = ?';
-       const result = await db.execute<ResultSetHeader>(query, [id]);
-       return result[0].affectedRows;
-    }
+    deleteProduct = async (id: number): Promise<ResultSetHeader> => {
+        const query = 'DELETE FROM practitioners WHERE id = ?';
+        const [result] = await db.execute<ResultSetHeader>(query, [id]);
+        return result;
+    };
+
 }
