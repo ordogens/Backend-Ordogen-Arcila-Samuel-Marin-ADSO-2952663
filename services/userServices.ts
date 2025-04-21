@@ -22,4 +22,8 @@ export class UserService {
     delete(id: number){
         return userRepository.deleteUser(id);
     }
+
+    getByCorreo(correo: string){
+        return userRepository.getUserByCorreo(correo);
+    }
 }

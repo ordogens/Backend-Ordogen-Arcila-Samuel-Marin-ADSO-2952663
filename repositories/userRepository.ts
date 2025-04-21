@@ -13,6 +13,11 @@ export class UserRepository {
         return rows[0];
     }
 
+    getUserByCorreo = async (correo: string) => {
+        const [rows]: any = await db.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
+        return rows[0];
+    }
+
     createUser = async (user: userDto) => {
         const {nombre,correo,contraseña, fecha_creacion} = user;
         const [result]: any = await db.query('INSERT INTO usuarios (nombre,apellido,email,telefono,direccion) VALUES (?,?,?,?,?)', [nombre,correo,contraseña, fecha_creacion]);
@@ -38,5 +43,7 @@ export class UserRepository {
         return result;
     };
 
-
+  
 }
+
+
