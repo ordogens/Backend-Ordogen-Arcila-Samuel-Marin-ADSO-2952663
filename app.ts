@@ -4,6 +4,7 @@ import dotenv from 'dotenv'; // Importa dotenv para cargar variables de entorno 
 import morgan from 'morgan'; // Importa morgan para el logging de las peticiones HTTP
 import ProductRoutes from './routes/Product.routes'; // Importa las rutas de productos definidas en otro archivo
 import UserRoutes from './routes/user.routes';
+import LoginRoutes from './routes/login.routes';
 
 // Load environment variables
 dotenv.config(); // Carga las variables de entorno definidas en el archivo .env
@@ -19,6 +20,8 @@ app.use(morgan('dev')); // Configura el logging en modo desarrollo
 // Routes
 app.use('/productos', ProductRoutes); // Monta las rutas de la API bajo el prefijo /api
 app.use('/usuarios', UserRoutes);
+app.use('/login', LoginRoutes);
+
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error(err.stack); // Registra el error en la consola
